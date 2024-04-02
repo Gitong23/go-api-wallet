@@ -1,0 +1,178 @@
+definitions:
+  wallet.Err:
+    properties:
+      message:
+        type: string
+    type: object
+  wallet.Wallet:
+    properties:
+      balance:
+        example: 100
+        type: number
+      created_at:
+        example: "2024-03-25T14:19:00.729237Z"
+        type: string
+      id:
+        example: 1
+        type: integer
+      user_id:
+        example: 1
+        type: integer
+      user_name:
+        example: John Doe
+        type: string
+      wallet_name:
+        example: John's Wallet
+        type: string
+      wallet_type:
+        example: Credit Card
+        type: string
+    type: object
+host: localhost:1323
+info:
+  contact: {}
+  description: Sophisticated Wallet API
+  title: Wallet API
+  version: "1.0"
+paths:
+  /api/v1/users/{id}/wallets:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a wallet
+      parameters:
+      - description: Wallet object that needs to be updated
+        in: body
+        name: wallet
+        required: true
+        schema:
+          $ref: '#/definitions/wallet.Wallet'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/wallet.Wallet'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/wallet.Err'
+      summary: Delete a wallet
+      tags:
+      - wallet
+    get:
+      consumes:
+      - application/json
+      description: Get wallets by user ID
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/wallet.Wallet'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/wallet.Err'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/wallet.Err'
+      summary: Get wallets by user ID
+      tags:
+      - wallet
+  /api/v1/wallets:
+    get:
+      consumes:
+      - application/json
+      description: Get all wallets
+      parameters:
+      - description: name search by wallet_type
+        in: query
+        name: wallet_type
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/wallet.Wallet'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/wallet.Err'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/wallet.Err'
+      summary: Get all wallets
+      tags:
+      - wallet
+    post:
+      consumes:
+      - application/json
+      description: Create a new wallet
+      parameters:
+      - description: Wallet object that needs to be created
+        in: body
+        name: wallet
+        required: true
+        schema:
+          $ref: '#/definitions/wallet.Wallet'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/wallet.Wallet'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/wallet.Err'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/wallet.Err'
+      summary: Create a new wallet
+      tags:
+      - wallet
+    put:
+      consumes:
+      - application/json
+      description: Update a wallet
+      parameters:
+      - description: Wallet object that needs to be updated
+        in: body
+        name: wallet
+        required: true
+        schema:
+          $ref: '#/definitions/wallet.Wallet'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/wallet.Wallet'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/wallet.Err'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/wallet.Err'
+      summary: Update a wallet
+      tags:
+      - wallet
+swagger: "2.0"

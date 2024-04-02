@@ -1,0 +1,10 @@
+export POSTGRES_DB_HOST=127.0.0.1 
+export POSTGRES_DB_PORT=5432 
+export POSTGRES_DB_USER=root 
+export POSTGRES_DB_PASSWORD=password 
+export POSTGRES_DB_NAME=wallet
+go run main.go
+
+
+//for access local machine network
+docker run --network=host go-wallet-api:latest
